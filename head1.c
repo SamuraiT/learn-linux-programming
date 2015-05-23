@@ -1,22 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define _GNU_SOURCE
+#include <getopt.h>
+
 static void head(FILE *f, long nlines);
 static void head_files(char *path, long nlines);
 
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    fprintf(stderr, "Usage: %s n [file file ....]\n", argv[0]);
-    exit(1);
-  }
-  long nlines = atol(argv[1]);
+#define DEFAULT_N_LINES 10
 
-  if (argc >= 3) {
-    int i;
-    for (i=2; i < argc; i++)
-      head_files(argv[i], nlines);
-  } else {
+static struct option longopts[] = {
+  {"lines", required_argument, NULL, 'n'},
+  {"help", no_argument, NULL, 'h'},
+  {0,0,0,0}
+};
+
+int main(int argc, char *argv[]) {
+  int opt;
+  long nlines = DEFAULT_N_LINES;
+
+  while ((opt = getopt_long(argc, argv, "n:", longopts, NULL)) != -1) {
+    switch(opt) {
+      case 'n':
+        nlines = atoi(optarg);
+        break;
+      case 'h':
+        fprintf(stdout, "Usage: %s [-n LINES] [FILE ...]\n", argv[0]);
+        exit(0);
+      case '?':
+        fprintf(stdout, "Usage: %s [-n LINES] [FILE ...]\n", argv[0]);
+        exit(1);
+    }
+  }
+
+  if (optind == argc) {
     head(stdin, nlines);
+  } else {
+    int i;
+    for (i=optind; i < argc; i++)
+      head_files(argv[i], nlines);
   }
   exit(0);
 }

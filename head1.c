@@ -27,6 +27,7 @@ static void head_files(char *path, long nlines) {
   f = fopen(path, "r");
   if (!f) {perror(path); exit(1);}
   head(f, nlines);
+  fclose(f);
 }
 
 static void head(FILE *f, long nlines) {

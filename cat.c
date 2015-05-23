@@ -8,20 +8,33 @@
 static void do_cat(const char *path);
 static void die(const char *s);
 static void pprint_fd(int fd);
+static void cat(int fd);
 
 int main(int argc, char *argv[]){
   int i;
-  if (argc < 2){
-    fprintf(stderr, "%s: file name not given\n", argv[0]);
-    exit(0);
-  }
-  for (i=1; i < argc; i++){
-    do_cat(argv[i]);
+  int fd;
+  if (argc == 1){
+    cat(STDIN_FILENO);
+  } else {
+    for (i=1; i < argc; i++){
+      fd = open(argv[i], O_RDONLY);
+      if (!fd) { perror(argv[i]); exit(1); }
+      cat(fd);
+    }
   }
   exit(0);
 }
 
 #define BUFFER_SIZE 2048
+
+static void cat(int fd) {
+  unsigned char buf[BUFFER_SIZE];
+  int n = 1;
+  while (n != 0) {
+    n = read(fd, buf, sizeof buf);
+    write(STDOUT_FILENO, buf, n);
+  }
+}
 
 static void do_cat(const char *path){
   int fd;

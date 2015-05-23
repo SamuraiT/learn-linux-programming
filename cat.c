@@ -14,7 +14,8 @@ int main(int argc, char *argv[]){
   int i;
   int fd;
   if (argc == 1){
-    cat(STDIN_FILENO);
+    fd = STDIN_FILENO;
+    cat(fd);
   } else {
     for (i=1; i < argc; i++){
       fd = open(argv[i], O_RDONLY);
@@ -22,6 +23,7 @@ int main(int argc, char *argv[]){
       cat(fd);
     }
   }
+  close(fd);
   exit(0);
 }
 

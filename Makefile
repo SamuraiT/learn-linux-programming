@@ -5,3 +5,7 @@ grep: grep.c
 
 ls: ls.c
 	$(CC) $(CFLAGS) -o $@ $<
+
+mkdir: mkdir.c
+	$(CC) $(CFLAGS) -o $@ $<
+

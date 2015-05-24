@@ -15,3 +15,6 @@ rmdir: rmdir.c
 ln: ln.c
 	$(CC) $(CFLAGS) -o $@ $< fail.c
 
+lns: symlink.c
+	$(CC) $(CFLAGS) -o $@ $< fail.c
+

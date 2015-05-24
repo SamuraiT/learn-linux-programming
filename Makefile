@@ -21,3 +21,6 @@ lns: symlink.c
 rm: rm.c
 	$(CC) $(CFLAGS) -o $@ $< fail.c
 
+mv: mv.c
+	$(CC) $(CFLAGS) -o $@ $< fail.c
+

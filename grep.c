@@ -22,10 +22,12 @@ int main(int argc, char *argv[]) {
   regex_t pattern;
   char *pat = '\0';
   int err, opt, i;
+  int CASE_SENSTIVE = 0;
   GREP_POINTER _grep = grep;
   while ((opt = getopt_long(argc, argv, "i:v:", longopts, NULL)) != -1) {
     switch (opt) {
       case 'i':
+        CASE_SENSTIVE = REG_ICASE;
         pat = optarg;
         break;
       case 'v':
@@ -37,12 +39,14 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
   }
-  if (!pat) pat = argv[optind];
   if (argc < 2) { fputs("no pattern\n", stderr); exit(1); }
-  err = regcomp(&pattern, pat, REG_EXTENDED | REG_NOSUB | REG_NEWLINE);
+  if (!pat) pat = argv[optind];
+
+  err = regcomp(&pattern, pat, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | CASE_SENSTIVE);
   if (err != 0) reg_error(err, &pattern);
-  if (argc == optind) { _grep(&pattern, stdin);}
+  if (argc == optind || argc == 2) { _grep(&pattern, stdin);}
   else {
+    if (optind == 1) optind++;
     for (i=optind; i < argc; i++)
       grep_files(&pattern, argv[i], _grep);
   }

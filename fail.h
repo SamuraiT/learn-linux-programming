@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-static void fail(char *path, char *reason,int should_perror) {
-  if (should_perror)
-    perror(path);
-  else
-    fprintf(stderr, reason, path);
-  exit(1);
-}
+#ifndef FAIL_H_
+#define FAIL_H_
+void fail(char *path, char *reason,int should_perror);
+#endif

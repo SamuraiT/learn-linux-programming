@@ -1,5 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -g
+error_printer=fail.c
+command = $(CC) $(CFLAGS) -o $@ $< $(error_printer)
+
 grep: grep.c
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -24,3 +27,5 @@ rm: rm.c
 mv: mv.c
 	$(CC) $(CFLAGS) -o $@ $< fail.c
 
+chmod: chmod.c
+	$(command)

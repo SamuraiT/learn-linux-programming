@@ -18,3 +18,6 @@ ln: ln.c
 lns: symlink.c
 	$(CC) $(CFLAGS) -o $@ $< fail.c
 
+rm: rm.c
+	$(CC) $(CFLAGS) -o $@ $< fail.c
+

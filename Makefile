@@ -9,3 +9,6 @@ ls: ls.c
 mkdir: mkdir.c
 	$(CC) $(CFLAGS) -o $@ $< fail.c
 
+rmdir: rmdir.c
+	$(CC) $(CFLAGS) -o $@ $< fail.c
+

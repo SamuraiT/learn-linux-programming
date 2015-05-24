@@ -12,3 +12,6 @@ mkdir: mkdir.c
 rmdir: rmdir.c
 	$(CC) $(CFLAGS) -o $@ $< fail.c
 
+ln: ln.c
+	$(CC) $(CFLAGS) -o $@ $< fail.c
+

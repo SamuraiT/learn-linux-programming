@@ -29,3 +29,12 @@ mv: mv.c
 
 chmod: chmod.c
 	$(command)
+
+lsr: traverse.c
+	$(command)
+
+try: try_rename.c
+	$(command)
+
+spawn: spawn.c
+	$(command)

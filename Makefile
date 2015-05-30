@@ -38,3 +38,9 @@ try: try_rename.c
 
 spawn: spawn.c
 	$(command)
+
+shell: shell.c
+	$(command)
+
+stop: stop.c
+	$(command)

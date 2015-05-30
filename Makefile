@@ -44,3 +44,6 @@ shell: shell.c
 
 stop: stop.c
 	$(command)
+
+stop_with_sigact: stop2.c
+	$(command)

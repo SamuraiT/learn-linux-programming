@@ -47,3 +47,9 @@ stop: stop.c
 
 stop_with_sigact: stop2.c
 	$(command)
+
+sample: sample.c
+	$(command)
+
+env: env.c
+	$(command)

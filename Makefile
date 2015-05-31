@@ -53,3 +53,6 @@ sample: sample.c
 
 env: env.c
 	$(command)
+
+daytime: daytime.c
+	$(command)

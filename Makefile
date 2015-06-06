@@ -56,3 +56,6 @@ env: env.c
 
 daytime: daytime.c
 	$(command)
+
+http: http.c
+	$(command)

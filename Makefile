@@ -59,3 +59,6 @@ daytime: daytime.c
 
 http: http.c
 	$(command)
+
+httpd: http2.c
+	$(command)
